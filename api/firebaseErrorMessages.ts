@@ -9,4 +9,5 @@ export const firebaseErrorMessages: Record<string, string> = {
   WEAK_PASSWORD: 'Слишком слабый пароль. Минимум 6 символов.',
   INVALID_EMAIL: 'Неверный формат email.',
   MISSING_PASSWORD: 'Введите пароль.',
+  INVALID_LOGIN_CREDENTIALS: 'Неверный пароль или email',
 };
