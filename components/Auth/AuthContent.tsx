@@ -1,18 +1,22 @@
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { Alert, StyleSheet, View } from 'react-native';
 
 import { Colors } from '../../constants/styles';
 import { Credentials, CredentialsInvalid } from '../../types';
+import { RootStackParamList } from '../../navigation/types';
 
 import { FlatButton } from '../ui/FlatButton';
 import { AuthForm } from './AuthForm';
 
 type Props = {
   isLogin?: boolean;
-  onAuthenticate?: (data: { email: string, password: string }) => void;
+  onAuthenticate?: (email: string, password: string) => void;
 }
 
 export const AuthContent = ({ isLogin, onAuthenticate }: Props) => {
+  const navigation = useNavigation<RootStackParamList>();
+
   const [credentialsInvalid, setCredentialsInvalid] = useState<CredentialsInvalid>({
     email: false,
     password: false,
@@ -21,7 +25,11 @@ export const AuthContent = ({ isLogin, onAuthenticate }: Props) => {
   });
 
   function switchAuthModeHandler() {
-    // Todo
+    if (isLogin) {
+      navigation.replace('Signup');
+    } else {
+      navigation.replace('Login');
+    }
   }
 
   function submitHandler(credentials: Credentials) {
@@ -31,7 +39,7 @@ export const AuthContent = ({ isLogin, onAuthenticate }: Props) => {
     password = password.trim();
 
     const emailIsValid = email.includes('@');
-    const passwordIsValid = password.length > 6;
+    const passwordIsValid = password.length >= 6;
     const emailsAreEqual = email === confirmEmail;
     const passwordsAreEqual = password === confirmPassword;
 
@@ -49,7 +57,7 @@ export const AuthContent = ({ isLogin, onAuthenticate }: Props) => {
       });
       return;
     }
-    onAuthenticate && onAuthenticate({ email, password });
+    onAuthenticate && onAuthenticate(email, password);
   }
 
   return (
