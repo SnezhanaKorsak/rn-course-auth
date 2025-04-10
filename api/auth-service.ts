@@ -26,7 +26,8 @@ export const StatisticsService = {
         password,
         returnSecureToken: true,
       });
-      return response;
+
+      return response.data.idToken;
     } catch (error) {
       throw getErrorMessage(error);
     }
@@ -38,7 +39,8 @@ export const StatisticsService = {
         password,
         returnSecureToken: true,
       });
-      return response;
+
+      return response.data.idToken;
     } catch (error) {
       throw getErrorMessage(error);
     }

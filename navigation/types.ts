@@ -7,7 +7,7 @@ export type AuthStackParamList = {
 };
 
 export type AuthenticatedStackParamList = {
-  WelcomeScreen: undefined;
+  Welcome: undefined;
 };
 
 export type RootStackParamList = CompositeNavigationProp<
